@@ -1,11 +1,15 @@
 package instructor;
 
 public class Instructor extends Person {
-    String employeeNumber;
+    private String employeeNumber;
+    private Subject[] subjects;
+    private int subjectCount = 0;
+    private int subjectCapacity = 10;
 
     public Instructor(String firstName, String secondName, String telephone, String email, String employeeNumber) {
         super(firstName, secondName, telephone, email);
         this.employeeNumber = employeeNumber;
+        subjects = new Subject[subjectCapacity];
     }
 
     public String cleanEmployeeNumber() {
@@ -40,5 +44,19 @@ public class Instructor extends Person {
         sb.append(secondName.toUpperCase()).append(" ");
         if(firstName != null) sb.append(firstName);
         return sb.toString();
+    }
+
+    public void addSubject(Subject subject) {
+        if(subjectCount == subjectCapacity) {
+            Subject[] newList = new Subject[subjectCapacity * 2];
+            for(int i = 0; i < subjectCount; i++) {
+                newList[i] = subjects[i];
+            }
+            subjects = newList;
+            subjectCapacity *= 2;
+        }
+
+        subjects[subjectCount] = subject;
+        subjectCount++;   
     }
 }

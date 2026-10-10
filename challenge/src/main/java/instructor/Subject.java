@@ -15,6 +15,7 @@ public class Subject {
             throw new IllegalArgumentException("Instructor cannot be null");
         }
         this.instructor = instructor;
+        instructor.addSubject(this);
     }
 
     public String normalizedCode() {
